@@ -24,18 +24,6 @@ public class Hex extends Broj{
 	    }
 	    return check;
 	}
-
-	public boolean maxNum(String hex) {
-		
-		int br = Integer.parseInt(hex, 16);
-		
-		if(br > Integer.MAX_VALUE) {
-			return false;
-		}else {
-			return true;
-		}
-		
-	}
 	
 	public String getHex() {
 		return hex;

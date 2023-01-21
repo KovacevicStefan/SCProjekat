@@ -78,17 +78,17 @@ public class SmartConverter implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		
 		if(dropMen.getSelectedIndex() == 0) {
-			this.fromHexCon();
+			fromHexCon();
 		}else if(dropMen.getSelectedIndex() == 1) {
-			this.fromBinCon();
+			fromBinCon();
 		}else if(dropMen.getSelectedIndex() == 2) {
-			this.fromDecCon();
+			fromDecCon();
 		}
 	}
 	
 	public void fromHexCon() {
     	
-		if(hex.check(broj.getText()) == true && hex.maxNum(broj.getText()) == true) {
+		if(hex.check(broj.getText()) == true) {
 			
 			hexadecimal.setText(broj.getText().toUpperCase());
 			
@@ -110,29 +110,47 @@ public class SmartConverter implements ActionListener{
    
 	public void fromBinCon() {
 		
-		if(bin.check(broj.getText()) == true && bin.maxNum(broj.getText()) == true) {
+		try {
+
+			if(bin.check(broj.getText()) == true) {
+				
+				binary.setText(broj.getText());
+				
+				String binarni = broj.getText();
+				int dec = Integer.parseInt(binarni, 2);
+				String decimalni = Integer.toString(dec);
+				
+				decimal.setText(decimalni);
+				
+				String heksadecimalni = Integer.toHexString(dec);
+				hexadecimal.setText(heksadecimalni.toUpperCase());
+			}else {
+				
+				JOptionPane.showMessageDialog(null, "VREDNOST NIJE VALIDNA!", "GRESKA", JOptionPane.PLAIN_MESSAGE);
+			}
+		
+		}catch(Exception e) {
 			
 			binary.setText(broj.getText());
 			
 			String binarni = broj.getText();
-			int dec = Integer.parseInt(binarni, 2);
-			String decimalni = Integer.toString(dec);
+			String invbin = binarni.replaceAll("0", "x").replaceAll("1", "0").replaceAll("x", "1");
+			int bin = Integer.parseInt(invbin);
+			int bin1 = bin+1; 
+			String binary = Integer.toString(bin1);
 			
-			decimal.setText(decimalni);
+			int dec = Integer.parseInt(binary, 2);
+			String decimalni = Integer.toString(dec);
+			decimal.setText("-"+decimalni);
 			
 			String heksadecimalni = Integer.toHexString(dec);
-			hexadecimal.setText(heksadecimalni.toUpperCase());
-			System.out.println(bin.maxNum(broj.getText()));
-		}else {
-			
-			JOptionPane.showMessageDialog(null, "VREDNOST NIJE VALIDNA!", "GRESKA", JOptionPane.PLAIN_MESSAGE);
+			hexadecimal.setText("-"+heksadecimalni.toUpperCase());
 		}
-		
 	}
 	
 	public void fromDecCon() {
 		
-		if(dec.check(broj.getText()) == true && dec.maxNum(broj.getText()) == true) {
+		if(dec.check(broj.getText()) == true) {
 			
 			String decimalni = broj.getText();
 			decimal.setText(broj.getText());

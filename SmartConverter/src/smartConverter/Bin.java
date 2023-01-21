@@ -22,17 +22,6 @@ public class Bin extends Broj{
 		}
 		return check;
 	}
-
-	public boolean maxNum(String bin) {
-		
-		int br = Integer.parseInt(bin, 2);
-		
-		if(br > Integer.MAX_VALUE) {
-			return false;
-		}else {
-			return true;
-		}
-	}
 	
 	public String getBin() {
 		return bin;
